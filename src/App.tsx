@@ -1,6 +1,7 @@
 import { useEffect, useState, useRef } from 'react'
 import './App.css';
 import NavBar from './components/NavBar';
+import SearchPage from './pages/SearchPage'
 
 function App() {
   const [count, setCount] = useState(0)
@@ -29,6 +30,7 @@ function App() {
   return (
     <section>
       <NavBar />
+      <SearchPage />
       <button onClick={() => setCount((v: number) => (v + 1))}>Increment {count}</button>
     </section>
   );
