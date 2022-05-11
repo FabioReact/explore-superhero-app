@@ -1,3 +1,7 @@
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
+
+.navClass {
+  @apply flex justify-center gap-4 capitalize text-red-800;
+}
