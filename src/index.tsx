@@ -6,6 +6,9 @@ import reportWebVitals from './reportWebVitals';
 import LoginContext from './context/login-context';
 import useConnection from './hooks/useConnection';
 import Spinner from './components/Spinner'
+import ReduxCounterPage from './pages/ReduxCounterPage'
+import { Provider } from 'react-redux'
+import { store } from './store/store'
 
 // import App from './App';
 // import LoginPage from './pages/LoginPage';
@@ -24,27 +27,30 @@ const root = ReactDOM.createRoot(
 const Root = () => {
   const { connected, username, login, logout } = useConnection();
   return (
-    <BrowserRouter>
-      <LoginContext.Provider
-        value={{
-          connected,
-          username,
-          login,
-          logout,
-        }}
-      >
-        <Suspense fallback={<Spinner />}>
-          <Routes>
-            <Route path="/" element={<Layout />}>
-              <Route index element={<App />} />
-              <Route path="login" element={<LoginPage />} />
-              <Route path="search" element={<SearchPage />} />
-              <Route path="*" element={<section>Page not found</section>} />
-            </Route>
-          </Routes>
-        </Suspense>
-      </LoginContext.Provider>
-    </BrowserRouter>
+    <Provider store={store}>
+      <BrowserRouter>
+        <LoginContext.Provider
+          value={{
+            connected,
+            username,
+            login,
+            logout,
+          }}
+        >
+          <Suspense fallback={<Spinner />}>
+            <Routes>
+              <Route path="/" element={<Layout />}>
+                <Route index element={<App />} />
+                <Route path="login" element={<LoginPage />} />
+                <Route path="search" element={<SearchPage />} />
+                <Route path="counter" element={<ReduxCounterPage />} />
+                <Route path="*" element={<section>Page not found</section>} />
+              </Route>
+            </Routes>
+          </Suspense>
+        </LoginContext.Provider>
+      </BrowserRouter>
+    </Provider>
   );
 };
 
