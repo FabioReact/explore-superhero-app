@@ -8,7 +8,7 @@ type Props = {
 
 const NavBarItem = ({ link, selected = false, handler }: Props) => {
   return (
-    <li onClick={handler} style={selected ? { fontWeight: 700 } : {}}>
+    <li onClick={handler} style={selected ? { fontWeight: 700 } : {}} className={selected ? "font-bold" : undefined}>
       {link}
     </li>
   );
@@ -19,7 +19,7 @@ const NavBar = () => {
   const arrayOfLinks = ['home', 'battle', 'search', 'profil'];
   return (
     <nav>
-      <ul>
+      <ul className='flex justify-center gap-4 capitalize text-red-800'>
         {/* {arrayOfLinks.map((link) => (
           <li
             onClick={() => setSelected(link)}
