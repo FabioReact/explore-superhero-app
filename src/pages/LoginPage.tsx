@@ -1,10 +1,12 @@
-import React, { useState } from 'react'
-import useConnection from '../hooks/useConnection'
+import React, { useContext, useState } from 'react'
+import LoginContext from '../context/login-context'
+// import useConnection from '../hooks/useConnection'
 
 const LoginPage = () => {
 	const [email, setEmail] = useState("")
 	const [password, setPassword] = useState("")
-	const { connected, username, login, logout } = useConnection() 
+	const { connected, username, login, logout } = useContext(LoginContext)
+	// const { connected, username, login, logout } = useConnection()
 
 	const submit = (event: React.SyntheticEvent) => {
 		event.preventDefault()

@@ -1,51 +1,53 @@
-import { useState } from 'react';
+import { useContext, useState } from 'react';
+import { Link } from 'react-router-dom';
+import LoginContext from '../context/login-context'
 
 type Props = {
   link: string;
   selected: boolean;
+  path: string;
   handler: () => void;
 };
 
-const NavBarItem = ({ link, selected = false, handler }: Props) => {
+const NavBarItem = ({ link, selected = false, path, handler }: Props) => {
   return (
-    <li onClick={handler} style={selected ? { fontWeight: 700 } : {}} className={selected ? "font-bold" : undefined}>
-      {link}
+    <li
+      onClick={handler}
+      style={selected ? { fontWeight: 700 } : {}}
+      className={selected ? 'font-bold' : undefined}
+    >
+      <Link to={path}>{link}</Link>
     </li>
   );
-}
+};
 
 const NavBar = () => {
   const [selected, setSelected] = useState('home');
-  const arrayOfLinks = ['home', 'battle', 'search', 'profil'];
+  const loginContext = useContext(LoginContext)
+  const arrayOfLinks = [
+    { link: 'home', path: '/' },
+    { link: 'battle', path: 'battle' },
+    { link: 'search', path: 'search' },
+    { link: 'profil', path: 'profil' },
+    { link: 'login', path: 'login' },
+    // { link: 'logout', path: 'logout' },
+  ];
   return (
     <nav>
-      <ul className='navClass'>
-        {/* {arrayOfLinks.map((link) => (
-          <li
-            onClick={() => setSelected(link)}
-            style={selected === link ? { fontWeight: 700 } : {}}
-          >
-            {link}
-          </li>
-        ))} */}
-        {arrayOfLinks.map((link) => (
-          <NavBarItem key={link} link={link} selected={selected === link} handler={() => setSelected(link)} />
+      <ul className="navClass">
+        {arrayOfLinks.map((linkObject) => (
+          <NavBarItem
+            key={linkObject.link}
+            link={linkObject.link}
+            path={linkObject.path}
+            selected={selected === linkObject.link}
+            handler={() => setSelected(linkObject.link)}
+          />
         ))}
-        {/* <li
-          onClick={() => setSelected('battle')}
-          style={selected === 'battle' ? { fontWeight: 700 } : {}}
-        >
-          Battle
-        </li>
-        <li
-          onClick={() => setSelected('Search')}
-          style={selected === 'Search' ? { fontWeight: 700 } : {}}
-        >
-          Search
-        </li> */}
+        {loginContext.connected && <button onClick={loginContext.logout}>Logout</button> }
       </ul>
     </nav>
   );
-}
+};
 
 export default NavBar;
