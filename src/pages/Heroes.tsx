@@ -3,6 +3,14 @@ import HeroCard from '../components/HeroCard';
 import Spinner from '../components/Spinner';
 import { useLazyGetHeroesByLetterQuery } from '../store/apiSlice';
 
+const createArrayOfLetters = () => {
+  const arrayOfLetters = []
+  for (let index = 65; index <= 90; index++) {
+    arrayOfLetters.push(String.fromCharCode(index))
+  }
+  return arrayOfLetters
+}
+
 const Heroes = () => {
   const [getHeroesByLetter, { data, isError, error, isLoading, isFetching }] =
     useLazyGetHeroesByLetterQuery();
@@ -11,7 +19,7 @@ const Heroes = () => {
     getHeroesByLetter('A');
   }, []);
 
-  const arrayOfLetters = ['A', 'B', 'C', 'D'];
+  const arrayOfLetters = createArrayOfLetters();
 
   const onSelectLetter = (letter: string) => {
     getHeroesByLetter(letter);

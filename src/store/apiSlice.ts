@@ -15,6 +15,19 @@ export const apiSlice = createApi({
     getHeroesByLetter: builder.query<Hero[], string>({
       query: (letter) => `heroes?name_like=^${letter}`,
     }),
+    addHero: builder.mutation<Hero, Hero>({
+      query: (hero) => ({
+        url: 'heroes',
+        method: 'POST',
+        body: hero,
+      }),
+    }),
+    removeHero: builder.mutation<Hero, string>({
+      query: (id) => ({
+        url: `heroes/${id}`,
+        method: 'DELETE',
+      })
+    })
   }),
 });
 
@@ -22,5 +35,7 @@ export const {
   useGetAllHeroesQuery,
   useGetHeroByIdQuery,
   useGetHeroesByLetterQuery,
-	useLazyGetHeroesByLetterQuery
+  useLazyGetHeroesByLetterQuery,
+	useAddHeroMutation,
+  useRemoveHeroMutation,
 } = apiSlice;

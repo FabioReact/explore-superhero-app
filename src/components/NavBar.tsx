@@ -29,6 +29,7 @@ const NavBar = () => {
     { link: 'battle', path: 'battle' },
     { link: 'heroes', path: 'heroes' },
     { link: 'search', path: 'search' },
+    { link: 'recruit', path: 'recruit' },
     { link: 'profil', path: 'profil' },
     { link: 'ReduxCounter', path: 'counter' },
     { link: 'login', path: 'login' },
