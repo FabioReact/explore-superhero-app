@@ -18,6 +18,8 @@ import { store } from './store/store'
 const App = lazy(() => import('./App'))
 const LoginPage = lazy(() => import('./pages/LoginPage'))
 const SearchPage = lazy(() => import('./pages/SearchPage'))
+const Heroes = lazy(() => import('./pages/Heroes'))
+const HeroDetails = lazy(() => import('./pages/HeroDetails'))
 const Layout = lazy(() => import('./hoc/Layout'))
 
 const root = ReactDOM.createRoot(
@@ -44,6 +46,8 @@ const Root = () => {
                 <Route path="login" element={<LoginPage />} />
                 <Route path="search" element={<SearchPage />} />
                 <Route path="counter" element={<ReduxCounterPage />} />
+                <Route path="heroes" element={<Heroes />} />
+                <Route path="heroes/:id" element={<HeroDetails />} />
                 <Route path="*" element={<section>Page not found</section>} />
               </Route>
             </Routes>

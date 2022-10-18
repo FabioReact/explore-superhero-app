@@ -1,5 +1,6 @@
 import { useReducer } from 'react'
 import { Hero } from '../types/hero'
+import { fetcher } from '../utils/fetcher'
 
 type ReducerState = {
   heroes: Hero[];
@@ -61,10 +62,9 @@ const useSearchHeroes = () => {
 	const onSearchHeroes = async (heroName: string|undefined) => {
     dispatch({ type: ActionNames.SET_LOADING });
     try {
-      const response = await fetch(
+      const result = await fetcher.get<Hero[]>(
         `http://localhost:4000/heroes?name_like=${heroName}`,
       );
-      const result = await response.json();
       dispatch({
         type: ActionNames.SET_HEROES,
         heroes: result,

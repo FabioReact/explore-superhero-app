@@ -27,6 +27,7 @@ const NavBar = () => {
   const arrayOfLinks = [
     { link: 'home', path: '/' },
     { link: 'battle', path: 'battle' },
+    { link: 'heroes', path: 'heroes' },
     { link: 'search', path: 'search' },
     { link: 'profil', path: 'profil' },
     { link: 'ReduxCounter', path: 'counter' },
